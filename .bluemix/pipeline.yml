@@ -19,7 +19,7 @@ stages:
     inputs:
       - type: job
         stage: BUILD
-        job: Build
+        job: Container Build
         dir_name: null
     triggers:
       - type: stage
@@ -40,14 +40,13 @@ stages:
         type: secure
         value: ${API_KEY}
     jobs:
-      - name: Deploy
-        type: deployer
-        target:
-          region_id: ${PROD_REGION_ID}
-          organization: ${PROD_ORG_NAME}
-          space: ${PROD_SPACE_NAME}
-          application: Pipeline
-        script: |
+     - name: Deploy Kubernetes Pod
+       type: deployer
+       target:
+        region_id: ${PROD_REGION_ID}
+        api_key: ${API_KEY}
+        kubernetes_cluster: ${PROD_CLUSTER_NAME}
+       script: |
           #!/bin/bash
           . ./scripts/deploy-to-bluemix/install.sh
           ./scripts/deploy-to-bluemix/bx_auth.sh
