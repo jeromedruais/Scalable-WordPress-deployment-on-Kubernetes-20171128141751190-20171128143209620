@@ -49,8 +49,8 @@ stages:
           application: Pipeline
         script: |
           #!/bin/bash
-          . ./scripts/deploy-to-bluemix/install_bx.sh
-          ./scripts/deploy-to-bluemix/bx_login.sh
+          . ./scripts/deploy-to-bluemix/install.sh
+          ./scripts/deploy-to-bluemix/bx_auth.sh
           ./scripts/deploy-to-bluemix/deploy.sh
 hooks:
   - enabled: true
